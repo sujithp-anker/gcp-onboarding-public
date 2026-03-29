@@ -5,6 +5,10 @@ provider "google" {
 
 resource "google_monitoring_notification_channel" "email-1" {
     display_name = var.display-name 
-    labels = var.email-address
+    type = "email"
+    labels = {
+        email_address = var.email-address
+    }
+
 }
 
