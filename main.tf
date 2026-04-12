@@ -1,18 +1,28 @@
-provider "google" {
-  project = "ankercloud-testing-account"
-  region = "asia-south1"
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.0"
+    }
+  }
 }
 
-module "notification-channel" {
-  source = "./modules/notification-channel"
-  display_name = var.display_name
+provider "google" {
+  project = "ankercloud-testing-account"
+  region  = "asia-south1"
+}
+
+module "notification_channel" {
+  source = "./modules/notification_channel"
+
+  display_name  = var.display_name
   email_address = var.email_address
 }
 
-module "snapshot-schedule" {
-  source = "./modules/snapshot-schedule"
-  days_in_cycle = var.days_in_cycle
-  start_time = var.start_time
+module "snapshot_schedule" {
+  source = "./modules/snapshot_schedule"
+
+  days_in_cycle  = var.days_in_cycle
+  start_time     = var.start_time
   retention_days = var.retention_days
-  
 }
