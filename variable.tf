@@ -17,3 +17,8 @@ variable "start_time" {
   type        = number
   description = "Snapshot start time (hour)"
 }
+
+variable "retention_days" {
+  type        = number
+  description = "Retention period"
+}
