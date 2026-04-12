@@ -1,4 +1,5 @@
 provider "google" {
+  project = "ankercloud-testing-account"
   region = "asia-south1"
 }
 
