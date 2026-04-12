@@ -1,5 +1,5 @@
 provider "google" {
-  region = "asia-south-1"
+  region = "asia-south1"
 }
 
 module "notification-channel" {
