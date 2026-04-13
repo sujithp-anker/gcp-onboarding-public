@@ -10,10 +10,10 @@ module "notification_channel" {
   email_address = var.email_address
 }
 
-module "snapshot_schedule" {
-  source = "./modules/snapshot_schedule"
+# module "snapshot_schedule" {
+#   source = "./modules/snapshot_schedule"
 
-  days_in_cycle  = var.days_in_cycle
-  start_time     = var.start_time
-  retention_days = var.retention_days
-}
+#   days_in_cycle  = var.days_in_cycle
+#   start_time     = var.start_time
+#   retention_days = var.retention_days
+# }
