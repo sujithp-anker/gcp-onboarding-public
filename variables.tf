@@ -28,11 +28,13 @@ variable "days_in_cycle" {
  variable "enable_cpu_80_alert" {
   type    = bool
   default = false
+  description = "CPU exceeds 80%"
 }
 
 variable "enable_cpu_90_alert" {
   type    = bool
   default = false
+  description = "CPU exceeds 90%"
 }
 
 variable "enable_ops_agent" {
