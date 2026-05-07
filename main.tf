@@ -17,3 +17,10 @@ module "snapshot_schedule" {
    start_time     = var.start_time
    retention_days = var.retention_days
  }
+
+ module "cpu_alerts"  {
+  source = "./modules/cpu-alerts"
+
+  notification_channel_id = module.notification_channel.notification_channel_id
+   
+ }
