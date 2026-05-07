@@ -40,4 +40,5 @@ variable "enable_cloudsql_replication_lag_alert" {
 variable "enable_cloudsql_active_connections_alert" {
   type    = bool
   default = false
+  description = "Default=100"
 }
