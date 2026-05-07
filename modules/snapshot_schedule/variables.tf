@@ -4,7 +4,7 @@ variable "days_in_cycle" {
 }
 
 variable "start_time" {
-    type = number
+    type = string
   description = "Mention the time to start the schedule"
 }
 
