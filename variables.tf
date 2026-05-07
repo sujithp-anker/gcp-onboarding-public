@@ -16,7 +16,7 @@ variable "days_in_cycle" {
  }
 
  variable "start_time" {
-   type        = number
+   type        = string 
    description = "Snapshot start time (hour)"
  }
 
