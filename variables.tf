@@ -24,3 +24,13 @@ variable "days_in_cycle" {
    type        = number
    description = "Retention period"
  }
+
+ variable "enable_cpu_80_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_cpu_90_alert" {
+  type    = bool
+  default = false
+}

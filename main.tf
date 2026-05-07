@@ -18,12 +18,7 @@ module "snapshot_schedule" {
    retention_days = var.retention_days
  }
 
- module "cpu_alerts"  {
-  source = "./modules/cpu-alerts"
-
-  notification_channel_id = module.notification_channel.notification_channel_id
-
-  module "cpu_alerts" {
+ module "cpu_alerts" {
   source = "./modules/cpu-alerts"
 
   notification_channel_id = module.notification_channel.notification_channel_id
@@ -31,5 +26,3 @@ module "snapshot_schedule" {
   enable_cpu_80_alert = var.enable_cpu_80_alert
   enable_cpu_90_alert = var.enable_cpu_90_alert
 }
-   
- }
