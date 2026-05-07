@@ -25,18 +25,35 @@ variable "days_in_cycle" {
    description = "Retention period"
  }
 
- variable "enable_cpu_80_alert" {
+ variable "enable_vm_cpu_80_alert" {
   type    = bool
   default = false
-  description = "CPU exceeds 80%"
 }
 
-variable "enable_cpu_90_alert" {
+variable "enable_vm_cpu_90_alert" {
   type    = bool
   default = false
-  description = "CPU exceeds 90%"
 }
 
+variable "enable_vm_memory_80_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_vm_memory_90_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_vm_disk_80_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_vm_disk_90_alert" {
+  type    = bool
+ default = false
+}
 variable "enable_ops_agent" {
   type        = bool
   description = "Enable Ops Agent"
