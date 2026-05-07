@@ -120,3 +120,7 @@ variable "enable_cloudsql_active_connections_alert" {
   type    = bool
   default = false
 }
+
+variable "project_id" {
+  type = string
+}
