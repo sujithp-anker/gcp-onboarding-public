@@ -31,3 +31,15 @@ module "ops_agent" {
   source = "./modules/ops_agent"
   count = var.enable_ops_agent ? 1 : 0
 }
+
+module "vpc_flowlogs" {
+
+  source = "./modules/vpc_flowlogs"
+
+  subnet_name          = var.subnet_name
+  region               = var.region
+  network              = var.network
+  ip_cidr_range        = var.ip_cidr_range
+
+  enable_vpc_flow_logs = var.enable_vpc_flow_logs
+}
