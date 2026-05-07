@@ -36,6 +36,7 @@ module "snapshot_schedule" {
 module "ops_agent" {
   source = "./modules/ops_agent"
   count = var.enable_ops_agent ? 1 : 0
+  project_id = var.project_id
 }
 
 module "vpc_flowlogs" {

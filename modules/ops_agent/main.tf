@@ -3,7 +3,8 @@ module "agent_policy" {
   version = "~> 0.2.3"
 
   project_id = var.project_id
-  policy_id  = "ops-agent-policy"
+
+  policy_id = "ops-agent-policy"
 
   agent_rules = [
     {
