@@ -1,4 +1,4 @@
-title: "Custom Admin - Part 1"
+title: "Custom_Admin_Part_1"
 description: 'Custom admin role covering core GCP services'
 stage: GA
 includedPermissions:
