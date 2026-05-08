@@ -77,3 +77,19 @@ module "custom_iam_role" {
   project_id    = var.project_id
   iam_user = var.iam_user
 } 
+
+module "lb_health_check" {
+
+  source = "./modules/lb-healthcheck"
+
+  project_id          = var.project_id
+  backend_service_name = var.backend_service_name
+  region              = var.region
+
+  health_check_name   = var.health_check_name
+
+  port                = var.port
+  request_path        = var.request_path
+
+  is_global           = var.is_global
+}
