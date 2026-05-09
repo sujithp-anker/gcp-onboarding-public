@@ -160,3 +160,16 @@ variable "bucket_names" {
 variable "lifecycle_age_days" {
   type = number
 }
+
+variable "zone" {
+  type = string
+}
+
+variable "instance_names" {
+  type = string
+}
+
+variable "enable_deletion_protection" {
+  type    = bool
+  default = true
+}

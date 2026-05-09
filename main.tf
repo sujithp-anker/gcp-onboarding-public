@@ -102,3 +102,19 @@ module "gcs_governance" {
   bucket_names        = var.bucket_names
   lifecycle_age_days  = var.lifecycle_age_days
 }
+
+module "vm_governance" {
+
+  source = "./modules/vm-labels"
+
+  project_id = var.project_id
+  zone       = var.zone
+
+  instance_names = split(",", var.instance_names)
+
+  labels = {
+    managed_by = "gaia"
+  }
+
+  enable_deletion_protection = var.enable_deletion_protection
+}
