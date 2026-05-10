@@ -97,7 +97,7 @@ module "gcs_governance" {
   lifecycle_age_days  = var.lifecycle_age_days
 }
 
-module "vm_governance" {
+module "vm_labels" {
 
   source = "./modules/vm-labels"
 
