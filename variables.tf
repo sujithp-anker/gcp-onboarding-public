@@ -152,10 +152,6 @@ variable "lifecycle_age_days" {
   type = number
 }
 
-variable "zone" {
-  type = string
-}
-
 variable "instance_names" {
   type = string
 }
@@ -174,10 +170,6 @@ variable "machine_type" {
 }
 
 variable "zone" {
-  type = string
-}
-
-variable "network" {
   type = string
 }
 
