@@ -1,31 +1,31 @@
 variable "display_name" {
   type        = string
   description = "Display name for alerts"
-  default = ""
+  default     = ""
 }
 
 variable "email_address" {
   type        = string
   description = "Email for alerts"
-  default = ""
+  default     = ""
 }
 
 variable "days_in_cycle" {
-   type        = number
-   description = "Snapshot frequency"
- }
+  type        = number
+  description = "Snapshot frequency"
+}
 
- variable "start_time" {
-   type        = string 
-   description = "Snapshot start time (hour)"
- }
+variable "start_time" {
+  type        = string
+  description = "Snapshot start time (hour)"
+}
 
- variable "retention_days" {
-   type        = number
-   description = "Retention period"
- }
+variable "retention_days" {
+  type        = number
+  description = "Retention period"
+}
 
- variable "enable_vm_cpu_80_alert" {
+variable "enable_vm_cpu_80_alert" {
   type    = bool
   default = false
 }
@@ -52,7 +52,7 @@ variable "enable_vm_disk_80_alert" {
 
 variable "enable_vm_disk_90_alert" {
   type    = bool
- default = false
+  default = false
 }
 
 variable "subnet_name" {
@@ -63,7 +63,7 @@ variable "region" {
   type = string
 }
 
-variable "network" {
+variable "vm_network" {
   type = string
 }
 
@@ -161,18 +161,18 @@ variable "enable_deletion_protection" {
   default = true
 }
 
-variable "instance_name" {
+variable "vm_instance_name" {
   type = string
 }
 
-variable "machine_type" {
+variable "vm_machine_type" {
   type = string
 }
 
-variable "zone" {
+variable "vm_zone" {
   type = string
 }
 
-variable "image" {
+variable "vm_image" {
   type = string
 }
