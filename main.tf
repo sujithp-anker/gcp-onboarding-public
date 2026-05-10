@@ -102,7 +102,7 @@ module "vm_labels" {
   source = "./modules/vm-labels"
 
   project_id = var.project_id
-  zone       = vm_zone
+  zone       =  var.vm_zone
 
   instance_names = split(",", var.instance_names)
 
