@@ -54,11 +54,6 @@ variable "enable_vm_disk_90_alert" {
   type    = bool
  default = false
 }
-variable "enable_ops_agent" {
-  type        = bool
-  description = "Enable Ops Agent"
-  default     = false
-}
 
 variable "subnet_name" {
   type = string
