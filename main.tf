@@ -96,32 +96,3 @@ module "gcs_governance" {
   bucket_names       = var.bucket_names
   lifecycle_age_days = var.lifecycle_age_days
 }
-
-module "vm_labels" {
-
-  source = "./modules/vm-labels"
-  depends_on = [module.vm]
-
-
-  project_id = var.project_id
-  zone       =  var.vm_zone
-
-  instance_names = split(",", var.instance_names)
-
-  labels = {
-    managed_by = "gaia"
-  }
-
-  enable_deletion_protection = var.enable_deletion_protection
-}
-
-module "vm" {
-  source = "./modules/vm"
-
-  project_id   = var.project_id
-  instance_name = var.vm_instance_name
-  machine_type  = var.vm_machine_type
-  zone          = var.vm_zone
-  network       = var.vm_network
-  image         = var.vm_image
-}
