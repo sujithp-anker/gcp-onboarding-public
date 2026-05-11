@@ -83,3 +83,20 @@ module "lb_health_check" {
   healthy_threshold   = var.healthy_threshold
   unhealthy_threshold = var.unhealthy_threshold
 }
+
+module "cloudarmor_policy" {
+
+  source = "./modules/cloudarmor-policy"
+
+  project_id = var.project_id
+
+  security_policy_name = var.security_policy_name
+
+  rule_priority = var.rule_priority
+
+  rule_action = var.rule_action
+
+  expression = var.expression
+
+  default_rule_action = var.default_rule_action
+}
