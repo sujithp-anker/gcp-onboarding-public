@@ -104,7 +104,7 @@ module "cloudarmor_policy" {
 
 module "gke_alerts" {
 
-  source = "./modules/gke-alerts-backup"
+  source = "./modules/gke-alerts"
 
   enable_gke_node_cpu_80_alert                  = var.enable_gke_node_cpu_80_alert
   enable_gke_node_memory_80_alert               = var.enable_gke_node_memory_80_alert
