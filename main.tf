@@ -117,20 +117,20 @@ module "gke_alerts" {
   notification_channel_id = module.notification_channel.notification_channel_id
 }
 
-module "gke_backup" {
+#module "gke_backup" {
 
-  source = "./modules/gke_backup"
+#  source = "./modules/gke_backup"
 
-  enable_gke_backup_plan = var.enable_gke_backup_plan
+#  enable_gke_backup_plan = var.enable_gke_backup_plan
 
-  gke_backup_plan_name = var.gke_backup_plan_name
-  gke_cluster_id       = var.gke_cluster_id
-  gke_backup_region    = var.gke_backup_region
+#  gke_backup_plan_name = var.gke_backup_plan_name
+#  gke_cluster_id       = var.gke_cluster_id
+#  gke_backup_region    = var.gke_backup_region
 
-  gke_backup_retention_days = var.gke_backup_retention_days
-  gke_backup_cron_schedule  = var.gke_backup_cron_schedule
+#  gke_backup_retention_days = var.gke_backup_retention_days
+#  gke_backup_cron_schedule  = var.gke_backup_cron_schedule
 
-}
+#}
 
 #module "budget_alert" {
 

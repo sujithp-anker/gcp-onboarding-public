@@ -192,37 +192,37 @@ variable "enable_gke_cluster_cpu_memory_saturation_alert" {
   default = false
 }
 
-variable "enable_gke_backup_failure_alert" {
-  type    = bool
-  default = false
-}
+#variable "enable_gke_backup_failure_alert" {
+#  type    = bool
+#  default = false
+#}
 
-variable "enable_gke_backup_plan" {
-  type    = bool
-  default = false
-}
+#variable "enable_gke_backup_plan" {
+#  type    = bool
+#  default = false
+#}
 
-variable "gke_backup_plan_name" {
-  type = string
-}
+#variable "gke_backup_plan_name" {
+#  type = string
+#}
 
-variable "gke_cluster_id" {
-  type = string
-}
+#variable "gke_cluster_id" {
+#  type = string
+#}
 
-variable "gke_backup_region" {
-  type = string
-}
+#variable "gke_backup_region" {
+#  type = string
+#}
 
-variable "gke_backup_retention_days" {
-  type    = number
-  default = 7
-}
+#variable "gke_backup_retention_days" {
+#  type    = number
+#  default = 7
+#}
 
-variable "gke_backup_cron_schedule" {
-  type    = string
-  default = "0 1 * * *"
-}
+#variable "gke_backup_cron_schedule" {
+#  type    = string
+#  default = "0 1 * * *"
+#}
 
 #variable "enable_budget_alert" {
 #  type    = bool
