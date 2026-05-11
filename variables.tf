@@ -168,12 +168,13 @@ variable "unhealthy_threshold" {
 
 variable "security_policy_name" {
   type = string
-  description = "value"
+  description = "Backend security policy or Edge securit policy"
 }
 
 variable "rule_priority" {
   type    = number
   default = 1000
+  description = "Priority of the Cloudarmor rule"
 }
 
 variable "rule_action" {
@@ -187,7 +188,7 @@ variable "src_ip_ranges" {
 
 variable "default_rule_action" {
   type    = string
-  default = "allow"
+  default = "deny"
 }
 
 variable "enable_gke_node_cpu_80_alert" {
@@ -225,13 +226,14 @@ variable "enable_gke_backup_failure_alert" {
   default = false
 }
 
-#variable "enable_gke_backup_plan" {
-#  type    = bool
-#  default = false
-#}
+variable "enable_gke_backup_plan" {
+  type    = bool
+  default = false
+}
 
 variable "gke_backup_plan_name" {
   type = string
+  description = "Backup Plan for GKE"
 }
 
 variable "gke_cluster_id" {
