@@ -253,7 +253,7 @@ variable "region" {
   type = string
 }
 
-variable "organization_id" {
+variable "project_id" {
   type = string
 }
 
@@ -271,4 +271,8 @@ variable "asset_feed_name" {
 
 variable "labels_to_apply" {
   type = map(string)
+}
+
+variable "organization_id" {
+  type = string
 }

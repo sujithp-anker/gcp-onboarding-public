@@ -151,9 +151,9 @@ module "resource_tagging" {
 
   source = "./modules/resource-tagging"
 
-  project_id      = var.project_id
-  region          = var.region
-  organization_id = var.organization_id
+  project_id = var.project_id
+
+  region = var.region
 
   function_name = var.function_name
 
