@@ -116,6 +116,24 @@ resource "google_project_iam_member" "storage_admin" {
   member = "serviceAccount:${google_service_account.labeler_sa.email}"
 }
 
+resource "google_project_iam_member" "cloudfunctions_admin" {
+
+  project = var.project_id
+
+  role = "roles/cloudfunctions.admin"
+
+  member = "serviceAccount:${google_service_account.labeler_sa.email}"
+}
+
+resource "google_project_iam_member" "run_admin" {
+
+  project = var.project_id
+
+  role = "roles/run.admin"
+
+  member = "serviceAccount:${google_service_account.labeler_sa.email}"
+}
+
 # ----------------------------------------
 # Random Bucket Suffix
 # ----------------------------------------
