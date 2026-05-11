@@ -76,9 +76,9 @@ module "lb_health_check" {
 
   source = "./modules/lb-healthcheck"
 
-  project_id           = var.project_id
+  project_id = var.project_id
+
   backend_service_name = var.backend_service_name
-  region               = var.region
 
   health_check_name = var.health_check_name
 
@@ -86,13 +86,4 @@ module "lb_health_check" {
   request_path = var.request_path
 
   is_global = var.is_global
-}
-
-module "gcs_governance" {
-
-  source = "./modules/s3"
-
-  project_id         = var.project_id
-  bucket_names       = var.bucket_names
-  lifecycle_age_days = var.lifecycle_age_days
 }

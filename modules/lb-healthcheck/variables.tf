@@ -2,15 +2,11 @@ variable "project_id" {
   type = string
 }
 
-variable "backend_service_name" {
-  type = string
-}
-
-variable "region" {
-  type = string
-}
-
 variable "health_check_name" {
+  type = string
+}
+
+variable "backend_service_name" {
   type = string
 }
 
@@ -23,6 +19,5 @@ variable "request_path" {
 }
 
 variable "is_global" {
-  type    = bool
-  default = true
+  type = bool
 }

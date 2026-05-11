@@ -1,6 +1,10 @@
 resource "google_compute_health_check" "hc" {
 
-  name = var.health_check_name
+  name    = var.health_check_name
+  project = var.project_id
+
+  timeout_sec        = 5
+  check_interval_sec = 10
 
   http_health_check {
     port         = var.port
@@ -8,42 +12,15 @@ resource "google_compute_health_check" "hc" {
   }
 }
 
-resource "null_resource" "attach_health_check_global" {
+resource "google_compute_backend_service" "backend" {
 
-  count = var.is_global ? 1 : 0
+  name                  = var.backend_service_name
+  project               = var.project_id
 
-  provisioner "local-exec" {
+  protocol              = "HTTP"
+  load_balancing_scheme = "EXTERNAL"
 
-    command = <<EOT
-gcloud compute backend-services update ${var.backend_service_name} \
-  --global \
-  --health-checks=${google_compute_health_check.hc.self_link} \
-  --project=${var.project_id}
-EOT
-
-  }
-
-  depends_on = [
-    google_compute_health_check.hc
-  ]
-}
-
-resource "null_resource" "attach_health_check_regional" {
-
-  count = var.is_global ? 0 : 1
-
-  provisioner "local-exec" {
-
-    command = <<EOT
-gcloud compute backend-services update ${var.backend_service_name} \
-  --region=${var.region} \
-  --health-checks=${google_compute_health_check.hc.self_link} \
-  --project=${var.project_id}
-EOT
-
-  }
-
-  depends_on = [
-    google_compute_health_check.hc
+  health_checks = [
+    google_compute_health_check.hc.id
   ]
 }
