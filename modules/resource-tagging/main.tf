@@ -65,7 +65,8 @@ resource "google_cloud_asset_project_feed" "asset_feed" {
   asset_types = [
     "compute.googleapis.com/Instance",
     "compute.googleapis.com/Disk",
-    "storage.googleapis.com/Bucket"
+    "storage.googleapis.com/Bucket",
+    "cloudfunctions.googleapis.com/Function"
   ]
 
   feed_output_config {
