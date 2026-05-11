@@ -132,20 +132,20 @@ module "gke_backup" {
 
 }
 
-module "budget_alert" {
+#module "budget_alert" {
 
-  source = "./modules/budget-alert"
+#  source = "./modules/budget-alert"
 
-  enable_budget_alert = var.enable_budget_alert
+# enable_budget_alert = var.enable_budget_alert
 
-  billing_account_id = var.billing_account_id
-  budget_name        = var.budget_name
-  project_number     = var.project_number
-  budget_amount      = var.budget_amount
+#  billing_account_id = var.billing_account_id
+ # budget_name        = var.budget_name
+#  project_number     = var.project_number
+#  budget_amount      = var.budget_amount
 
-  notification_channel_id = module.notification_channel.notification_channel_id
+#  notification_channel_id = module.notification_channel.notification_channel_id
 
-}
+#}
 
 module "resource_tagging" {
 
