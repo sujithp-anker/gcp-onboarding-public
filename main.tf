@@ -168,21 +168,21 @@ module "monitoring_alerts" {
 
   source = "./modules/monitoring-alerts"
 
-  enable_iam_policy_change_alert           = var.enable_iam_policy_change_alert
+  enable_iam_policy_change_alert = var.enable_iam_policy_change_alert
 
-  enable_firewall_events_alert             = var.enable_firewall_events_alert
+  enable_firewall_events_alert = var.enable_firewall_events_alert
 
-  enable_instance_delete_alert             = var.enable_instance_delete_alert
+  enable_instance_delete_alert = var.enable_instance_delete_alert
 
-  enable_instance_insert_alert             = var.enable_instance_insert_alert
+  enable_instance_insert_alert = var.enable_instance_insert_alert
 
-  enable_label_modification_alert          = var.enable_label_modification_alert
+  enable_label_modification_alert = var.enable_label_modification_alert
 
-  enable_service_account_creation_alert    = var.enable_service_account_creation_alert
+  enable_service_account_creation_alert = var.enable_service_account_creation_alert
 
-  enable_disk_deletion_alert               = var.enable_disk_deletion_alert
+  enable_disk_deletion_alert = var.enable_disk_deletion_alert
 
   enable_service_account_key_deletion_alert = var.enable_service_account_key_deletion_alert
 
-  notification_channel_id = var.notification_channel_id
+  notification_channel_id = module.notification_channel.notification_channel_id
 }
