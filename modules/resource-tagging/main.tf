@@ -19,7 +19,9 @@ resource "google_project_service" "services" {
 
 # ----------------------------------------
 # Current Project Info
+
 # ----------------------------------------
+
 
 data "google_project" "current" {
 
@@ -32,12 +34,55 @@ data "google_project" "current" {
 
 resource "google_pubsub_topic" "asset_events" {
 
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+
   name = var.pubsub_topic_name
 }
 
 # ----------------------------------------
 # Allow Cloud Asset API To Publish
 # ----------------------------------------
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+
 
 resource "google_pubsub_topic_iam_member" "asset_feed_publisher" {
 
@@ -52,6 +97,7 @@ resource "google_pubsub_topic_iam_member" "asset_feed_publisher" {
 
 # ----------------------------------------
 # Project Asset Feed
+
 # ----------------------------------------
 
 resource "google_cloud_asset_project_feed" "asset_feed" {
@@ -68,6 +114,9 @@ resource "google_cloud_asset_project_feed" "asset_feed" {
     "storage.googleapis.com/Bucket",
     "cloudfunctions.googleapis.com/Function",
     "run.googleapis.com/Service"
+    "run.googleapis.com/Job"
+
+    
   ]
 
   feed_output_config {
@@ -82,6 +131,27 @@ resource "google_cloud_asset_project_feed" "asset_feed" {
     google_project_service.services,
     google_pubsub_topic_iam_member.asset_feed_publisher
   ]
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+
 }
 
 # ----------------------------------------
@@ -95,11 +165,53 @@ resource "google_service_account" "labeler_sa" {
   display_name = "Event Driven Labeler"
 }
 
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+
 # ----------------------------------------
 # IAM Permissions
 # ----------------------------------------
 
 resource "google_project_iam_member" "compute_admin" {
+
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
 
   project = var.project_id
 
@@ -113,6 +225,27 @@ resource "google_project_iam_member" "storage_admin" {
   project = var.project_id
 
   role = "roles/storage.admin"
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+
 
   member = "serviceAccount:${google_service_account.labeler_sa.email}"
 }
@@ -126,7 +259,28 @@ resource "google_project_iam_member" "cloudfunctions_admin" {
   member = "serviceAccount:${google_service_account.labeler_sa.email}"
 }
 
-resource "google_project_iam_member" "run_admin" {
+resource "google_project_iam_member" 
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+"run_admin" {
 
   project = var.project_id
 
@@ -197,6 +351,27 @@ resource "google_cloudfunctions2_function" "labeler_function" {
 
     runtime = "python311"
 
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+
     entry_point = "main"
 
     source {
@@ -213,6 +388,27 @@ resource "google_cloudfunctions2_function" "labeler_function" {
   service_config {
 
     max_instance_count = 1
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
+
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
+
+        print("RAW MESSAGE:")
+        print(pubsub_message)
+
+        message_json = json.loads(pubsub_message)
+
+        asset = message_json.get("asset", {})
+
+        asset_type = asset.get("assetType", "")
+
+        print(f"Asset Type: {asset_type}")
+
+        print(repr(asset_type))
+
 
     available_memory = "256M"
 

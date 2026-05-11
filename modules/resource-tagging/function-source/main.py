@@ -7,6 +7,7 @@ from handlers.bucket import handle_bucket
 from handlers.cloudrun import handle_cloud_run
 from handlers.cloudfunction import handle_cloud_function
 from handlers.disk import handle_disk
+from handlers.cloudrunjob import handle_cloud_run_job
 
 LABELS = json.loads(os.environ["LABELS"])
 
@@ -62,10 +63,14 @@ def main(event, context):
 
             handle_cloud_function(asset, LABELS)
 
+        elif asset_type == "run.googleapis.com/Job":
+
+            handle_cloud_run_job(asset, LABELS)    
+
         else:
 
             print("Unsupported asset type")
-
+ "run.googleapis.com/Job"
     except Exception as e:
 
         print(f"ERROR: {str(e)}")
