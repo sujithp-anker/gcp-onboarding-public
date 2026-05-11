@@ -1,13 +1,13 @@
 
 variable "project_id" {
-  type = string
+  type        = string
   description = "Enter GCP Project ID"
 }
 
 variable "Display_name" {
   type        = string
   description = "Display name for alerts-notification"
-  default = ""
+  default     = ""
 }
 
 variable "Email_address" {
@@ -16,119 +16,163 @@ variable "Email_address" {
 }
 
 variable "days_in_cycle" {
-   type        = number
-   description = "eg:1, create snapshot every 1 day"
-}  
+  type        = number
+  description = "eg:1, create snapshot every 1 day"
+}
 
- variable "start_time" {
-   type        = string 
-   description = "Start time for the snapshot schedule,[24 hour format]"
- }
+variable "start_time" {
+  type        = string
+  description = "Start time for the snapshot schedule,[24 hour format]"
+}
 
- variable "retention_days" {
-   type        = number
-   description = "Retention period for the snapshots"
- }
+variable "retention_days" {
+  type        = number
+  description = "Retention period for the snapshots"
+}
 
- variable "enable_vm_cpu_80_alert" {
+variable "enable_iam_policy_change_alert" {
   type    = bool
   default = false
+}
+
+variable "enable_firewall_events_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_instance_delete_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_instance_insert_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_label_modification_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_service_account_creation_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_disk_deletion_alert" {
+  type    = bool
+  default = false
+}
+
+variable "enable_service_account_key_deletion_alert" {
+  type    = bool
+  default = false
+}
+
+variable "notification_channel_id" {
+  type = string
+}
+
+variable "enable_vm_cpu_80_alert" {
+  type        = bool
+  default     = false
   description = "Enable or disable VM CPU utilization alert policy"
- } 
+}
 
 variable "enable_vm_cpu_90_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable VM CPU utilization alert policy"
 }
 
 variable "enable_vm_memory_80_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable VM Memory utilization alert policy"
 }
 
 variable "enable_vm_memory_90_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable VM Memory utilization alert policy"
 }
 
 variable "enable_vm_disk_80_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable VM disk utilization alert policy"
 }
 
 variable "enable_vm_disk_90_alert" {
-  type    = bool
- default = false
- description = "Enable or disable VM disk utilization alert policy"
+  type        = bool
+  default     = false
+  description = "Enable or disable VM disk utilization alert policy"
 }
 
 variable "enable_cloudsql_cpu_80_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql CPU utilization alert policy"
 }
 
 variable "enable_cloudsql_cpu_90_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql CPU utilization alert policy"
 }
 
 variable "enable_cloudsql_memory_80_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql Memory utilization alert policy"
 
 }
 
 variable "enable_cloudsql_memory_90_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql Memory utilization alert policy"
 }
 
 variable "enable_cloudsql_disk_80_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql disk utilization alert policy"
 }
 
 variable "enable_cloudsql_disk_90_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql disk utilization alert policy"
 }
 
 variable "enable_cloudsql_replication_lag_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql replication_lag alert policy"
 }
 
 variable "enable_cloudsql_active_connections_alert" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable or disable Cloudsql active-connections alert policy"
 }
 
 variable "iam_user" {
-  type = string
+  type        = string
   description = "IAM user to attach the custom role"
 }
 
 variable "create_custom_roles" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Least-priviledge role"
 }
 
 variable "enable_viewer_role" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Viewer role"
 }
 variable "health_check_name" {
@@ -167,13 +211,13 @@ variable "unhealthy_threshold" {
 }
 
 variable "security_policy_name" {
-  type = string
+  type        = string
   description = "Backend security policy or Edge securit policy"
 }
 
 variable "rule_priority" {
-  type    = number
-  default = 1000
+  type        = number
+  default     = 1000
   description = "Priority of the Cloudarmor rule"
 }
 
@@ -232,7 +276,7 @@ variable "enable_gke_backup_plan" {
 }
 
 variable "gke_backup_plan_name" {
-  type = string
+  type        = string
   description = "Backup Plan for GKE"
 }
 
@@ -256,7 +300,7 @@ variable "gke_backup_cron_schedule" {
 
 variable "enable_budget_alert" {
   type    = bool
- default = false
+  default = false
 }
 
 variable "billing_account_id" {
