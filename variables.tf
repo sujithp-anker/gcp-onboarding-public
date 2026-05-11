@@ -55,27 +55,6 @@ variable "enable_vm_disk_90_alert" {
  default = false
 }
 
-variable "subnet_name" {
-  type = string
-}
-
-variable "region" {
-  type = string
-}
-
-variable "vm_network" {
-  type = string
-}
-
-variable "ip_cidr_range" {
-  type = string
-}
-
-variable "enable_vpc_flow_logs" {
-  type    = bool
-  default = false
-}
-
 variable "enable_cloudsql_cpu_80_alert" {
   type    = bool
   default = false
