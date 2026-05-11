@@ -29,6 +29,8 @@ resource "google_pubsub_topic" "asset_events" {
 
 resource "google_cloud_asset_organization_feed" "asset_feed" {
 
+  provider = google-beta
+
   organization = var.organization_id
 
   feed_id = var.asset_feed_name
@@ -42,7 +44,9 @@ resource "google_cloud_asset_organization_feed" "asset_feed" {
   ]
 
   feed_output_config {
+
     pubsub_destination {
+
       topic = google_pubsub_topic.asset_events.id
     }
   }
