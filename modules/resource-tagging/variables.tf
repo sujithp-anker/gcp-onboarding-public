@@ -6,10 +6,6 @@ variable "region" {
   type = string
 }
 
-variable "organization_id" {
-  type = string
-}
-
 variable "function_name" {
   type = string
 }

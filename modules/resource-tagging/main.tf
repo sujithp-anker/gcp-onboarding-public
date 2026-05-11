@@ -1,4 +1,5 @@
 resource "google_project_service" "services" {
+
   for_each = toset([
     "cloudfunctions.googleapis.com",
     "cloudasset.googleapis.com",
@@ -10,6 +11,7 @@ resource "google_project_service" "services" {
   ])
 
   project = var.project_id
+
   service = each.value
 
   disable_on_destroy = false
@@ -20,18 +22,17 @@ resource "google_project_service" "services" {
 # ----------------------------------------
 
 resource "google_pubsub_topic" "asset_events" {
+
   name = var.pubsub_topic_name
 }
 
 # ----------------------------------------
-# Cloud Asset Feed
+# Project Asset Feed
 # ----------------------------------------
 
-resource "google_cloud_asset_organization_feed" "asset_feed" {
+resource "google_cloud_asset_project_feed" "asset_feed" {
 
-  provider = google-beta
-
-  organization = var.organization_id
+  project = var.project_id
 
   feed_id = var.asset_feed_name
 
@@ -62,7 +63,8 @@ resource "google_cloud_asset_organization_feed" "asset_feed" {
 
 resource "google_service_account" "labeler_sa" {
 
-  account_id   = "event-driven-labeler"
+  account_id = "event-driven-labeler"
+
   display_name = "Event Driven Labeler"
 }
 
@@ -73,7 +75,8 @@ resource "google_service_account" "labeler_sa" {
 resource "google_project_iam_member" "compute_admin" {
 
   project = var.project_id
-  role    = "roles/compute.admin"
+
+  role = "roles/compute.admin"
 
   member = "serviceAccount:${google_service_account.labeler_sa.email}"
 }
@@ -81,38 +84,55 @@ resource "google_project_iam_member" "compute_admin" {
 resource "google_project_iam_member" "storage_admin" {
 
   project = var.project_id
-  role    = "roles/storage.admin"
+
+  role = "roles/storage.admin"
 
   member = "serviceAccount:${google_service_account.labeler_sa.email}"
 }
 
 # ----------------------------------------
-# Function Source ZIP
+# Random Bucket Suffix
+# ----------------------------------------
+
+resource "random_id" "bucket_suffix" {
+
+  byte_length = 4
+}
+
+# ----------------------------------------
+# Archive Function Code
 # ----------------------------------------
 
 data "archive_file" "function_zip" {
 
   type = "zip"
 
-  source_dir  = "${path.module}/function-source"
+  source_dir = "${path.module}/function-source"
+
   output_path = "${path.module}/function-source.zip"
 }
 
 # ----------------------------------------
-# Function Bucket
+# Storage Bucket
 # ----------------------------------------
 
 resource "google_storage_bucket" "function_bucket" {
 
-  name     = "${var.project_id}-resource-tagging-function"
+  name = "${var.project_id}-resource-tagging-${random_id.bucket_suffix.hex}"
+
   location = var.region
 
   uniform_bucket_level_access = true
 }
 
+# ----------------------------------------
+# Upload ZIP
+# ----------------------------------------
+
 resource "google_storage_bucket_object" "function_archive" {
 
-  name   = "function-source.zip"
+  name = "function-source.zip"
+
   bucket = google_storage_bucket.function_bucket.name
 
   source = data.archive_file.function_zip.output_path
@@ -124,12 +144,14 @@ resource "google_storage_bucket_object" "function_archive" {
 
 resource "google_cloudfunctions2_function" "labeler_function" {
 
-  name     = var.function_name
+  name = var.function_name
+
   location = var.region
 
   build_config {
 
-    runtime     = "python311"
+    runtime = "python311"
+
     entry_point = "main"
 
     source {
@@ -137,6 +159,7 @@ resource "google_cloudfunctions2_function" "labeler_function" {
       storage_source {
 
         bucket = google_storage_bucket.function_bucket.name
+
         object = google_storage_bucket_object.function_archive.name
       }
     }
@@ -153,6 +176,7 @@ resource "google_cloudfunctions2_function" "labeler_function" {
     service_account_email = google_service_account.labeler_sa.email
 
     environment_variables = {
+
       LABELS = jsonencode(var.labels_to_apply)
     }
   }
