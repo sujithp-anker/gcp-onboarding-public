@@ -1,11 +1,23 @@
 resource "google_compute_security_policy" "cloud_armor_policy" {
 
-  name        = var.security_policy_name
-  description = var.description
-
+  name    = var.security_policy_name
   project = var.project_id
 
   type = "CLOUD_ARMOR"
+
+  rule {
+
+    priority = var.rule_priority
+
+    action = var.rule_action
+
+    match {
+
+      expr {
+        expression = var.expression
+      }
+    }
+  }
 
   rule {
 
@@ -21,7 +33,5 @@ resource "google_compute_security_policy" "cloud_armor_policy" {
         src_ip_ranges = ["*"]
       }
     }
-
-    description = "Default rule"
   }
 }
