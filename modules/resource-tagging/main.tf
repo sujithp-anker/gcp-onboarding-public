@@ -156,7 +156,7 @@ resource "google_storage_bucket" "function_bucket" {
 
 resource "google_storage_bucket_object" "function_archive" {
 
-  name = "function-source.zip"
+  name = "function-source-${data.archive_file.function_zip.output_md5}.zip"
 
   bucket = google_storage_bucket.function_bucket.name
 
