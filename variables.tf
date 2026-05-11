@@ -249,10 +249,6 @@ variable "budget_amount" {
   type = number
 }
 
-variable "project_id" {
-  type = string
-}
-
 variable "region" {
   type = string
 }
