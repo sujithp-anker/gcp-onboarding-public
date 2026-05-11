@@ -33,18 +33,6 @@ module "vm-alerts" {
   enable_vm_disk_90_alert = var.enable_vm_disk_90_alert
 }
 
-#module "vpc_flowlogs" {
-
-#  source = "./modules/vpc_flowlogs"
-
-# subnet_name          = var.subnet_name
-#region               = var.region
-#network              = var.network
-#ip_cidr_range        = var.ip_cidr_range
-
-#enable_vpc_flow_logs = var.enable_vpc_flow_logs
-#}
-
 module "cloudsql_alerts" {
 
   source = "./modules/cloudsql-alerts"
@@ -78,12 +66,14 @@ module "lb_health_check" {
 
   project_id = var.project_id
 
-  backend_service_name = var.backend_service_name
-
   health_check_name = var.health_check_name
 
   port         = var.port
   request_path = var.request_path
 
-  is_global = var.is_global
+  check_interval_sec  = var.check_interval_sec
+  timeout_sec         = var.timeout_sec
+
+  healthy_threshold   = var.healthy_threshold
+  unhealthy_threshold = var.unhealthy_threshold
 }

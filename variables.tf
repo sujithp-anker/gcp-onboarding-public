@@ -124,12 +124,12 @@ variable "iam_user" {
   type = string
 }
 
-variable "backend_service_name" {
+variable "health_check_name" {
   type = string
 }
 
-variable "health_check_name" {
-  type = string
+variable "check_interval_sec" {
+  type = number
 }
 
 variable "port" {
@@ -140,6 +140,14 @@ variable "request_path" {
   type = string
 }
 
-variable "is_global" {
-  type = bool
+variable "timeout_sec" {
+  type = number
+}
+
+variable "healthy_threshold" {
+  type = number
+}
+
+variable "unhealthy_threshold" {
+  type = number
 }
