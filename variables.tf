@@ -280,18 +280,21 @@ variable "region" {
 }
 
 variable "function_name" {
-  type = string
+  type        = string
+  description = "Name of the Cloud Function used for automatic resource labeling"
 }
 
 variable "pubsub_topic_name" {
-  type = string
+  type        = string
+  description = "Name of the Pub/Sub topic used to receive resource change events"
 }
 
 variable "asset_feed_name" {
-  type = string
+  type        = string
+  description = "Name of the Cloud Asset Inventory feed used to monitor resource events"
 }
 
 variable "labels_to_apply" {
-  type = map(string)
+  type        = map(string)
   description = "Labels to attach automatically to newly created resources such as VMs, Cloud SQL instances, buckets, and Cloud Run services"
-  }
+}
