@@ -11,71 +11,92 @@ compute = build("compute", "v1")
 
 def main(event, context):
 
-    if "data" not in event:
-        print("No data found in event")
-        return
+    try:
 
-    pubsub_message = base64.b64decode(
-        event["data"]
-    ).decode("utf-8")
+        if "data" not in event:
+            print("No data found in event")
+            return
 
-    if not pubsub_message:
-        print("Empty Pub/Sub message")
-        return
+        pubsub_message = base64.b64decode(
+            event["data"]
+        ).decode("utf-8")
 
-    print(pubsub_message)
+        if not pubsub_message.strip():
+            print("Empty Pub/Sub message")
+            return
 
-    message_json = json.loads(pubsub_message)
+        print("RAW MESSAGE:")
+        print(pubsub_message)
 
-    asset = message_json.get("asset", {})
+        message_json = json.loads(pubsub_message)
 
-    asset_type = asset.get("assetType", "")
+        asset = message_json.get("asset", {})
 
-    if asset_type != "compute.googleapis.com/Instance":
-        print("Not a compute instance event")
-        return
+        asset_type = asset.get("assetType", "")
 
-    asset_name = asset.get("name", "")
+        print(f"Asset Type: {asset_type}")
 
-    print(f"Asset Name: {asset_name}")
+        if asset_type != "compute.googleapis.com/Instance":
+            print("Skipping non-compute instance event")
+            return
 
-    parts = asset_name.split("/")
+        asset_name = asset.get("name", "")
 
-    if len(parts) < 9:
-        print("Invalid asset name format")
-        return
+        print(f"Asset Name: {asset_name}")
 
-    project = parts[4]
+        if not asset_name:
+            print("Asset name missing")
+            return
 
-    zone = parts[6]
+        parts = asset_name.split("/")
 
-    instance_name = parts[8]
+        print(parts)
 
-    print(f"Project: {project}")
-    print(f"Zone: {zone}")
-    print(f"Instance: {instance_name}")
+        if len(parts) < 9:
+            print("Invalid asset name format")
+            return
 
-    instance = compute.instances().get(
-        project=project,
-        zone=zone,
-        instance=instance_name
-    ).execute()
+        project = parts[4]
 
-    existing_labels = instance.get("labels", {})
+        zone = parts[6]
 
-    merged_labels = {
-        **existing_labels,
-        **LABELS
-    }
+        instance_name = parts[8]
 
-    compute.instances().setLabels(
-        project=project,
-        zone=zone,
-        instance=instance_name,
-        body={
-            "labels": merged_labels,
-            "labelFingerprint": instance["labelFingerprint"]
+        print(f"Project: {project}")
+        print(f"Zone: {zone}")
+        print(f"Instance: {instance_name}")
+
+        instance = compute.instances().get(
+            project=project,
+            zone=zone,
+            instance=instance_name
+        ).execute()
+
+        existing_labels = instance.get("labels", {})
+
+        print(f"Existing Labels: {existing_labels}")
+
+        merged_labels = {
+            **existing_labels,
+            **LABELS
         }
-    ).execute()
 
-    print(f"Labels updated for {instance_name}")
+        print(f"Merged Labels: {merged_labels}")
+
+        compute.instances().setLabels(
+            project=project,
+            zone=zone,
+            instance=instance_name,
+            body={
+                "labels": merged_labels,
+                "labelFingerprint": instance["labelFingerprint"]
+            }
+        ).execute()
+
+        print(f"Labels updated successfully for {instance_name}")
+
+    except Exception as e:
+
+        print(f"ERROR: {str(e)}")
+
+        raise
