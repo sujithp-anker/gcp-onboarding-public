@@ -6,8 +6,8 @@ provider "google" {
 module "notification_channel" {
   source = "./modules/notification_channel"
 
-  display_name  = var.display_name
-  email_address = var.email_address
+  display_name  = var.Display_name
+  email_address = var.Email_address
 }
 
 module "snapshot_schedule" {

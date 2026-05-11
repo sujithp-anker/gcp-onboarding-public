@@ -1,144 +1,174 @@
-variable "display_name" {
+
+variable "project_id" {
+  type = string
+  description = "Enter GCP Project ID"
+}
+
+variable "Display_name" {
   type        = string
-  description = "Display name for alerts"
+  description = "Display name for alerts-notification"
   default = ""
 }
 
-variable "email_address" {
+variable "Email_address" {
   type        = string
-  description = "Email for alerts"
-  default = ""
+  description = "Email address for alerts notification"
 }
 
 variable "days_in_cycle" {
    type        = number
-   description = "Snapshot frequency"
- }
+   description = "eg:1, create snapshot every 1 day"
+}  
 
  variable "start_time" {
    type        = string 
-   description = "Snapshot start time (hour)"
+   description = "Start time for the snapshot schedule,[24 hour format]"
  }
 
  variable "retention_days" {
    type        = number
-   description = "Retention period"
+   description = "Retention period for the snapshots"
  }
 
  variable "enable_vm_cpu_80_alert" {
   type    = bool
   default = false
-}
+  description = "Enable or disable VM CPU utilization alert policy"
+ } 
 
 variable "enable_vm_cpu_90_alert" {
   type    = bool
   default = false
+  description = "Enable or disable VM CPU utilization alert policy"
 }
 
 variable "enable_vm_memory_80_alert" {
   type    = bool
   default = false
+  description = "Enable or disable VM Memory utilization alert policy"
 }
 
 variable "enable_vm_memory_90_alert" {
   type    = bool
   default = false
+  description = "Enable or disable VM Memory utilization alert policy"
 }
 
 variable "enable_vm_disk_80_alert" {
   type    = bool
   default = false
+  description = "Enable or disable VM disk utilization alert policy"
 }
 
 variable "enable_vm_disk_90_alert" {
   type    = bool
  default = false
+ description = "Enable or disable VM disk utilization alert policy"
 }
 
 variable "enable_cloudsql_cpu_80_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql CPU utilization alert policy"
 }
 
 variable "enable_cloudsql_cpu_90_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql CPU utilization alert policy"
 }
 
 variable "enable_cloudsql_memory_80_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql Memory utilization alert policy"
+
 }
 
 variable "enable_cloudsql_memory_90_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql Memory utilization alert policy"
 }
 
 variable "enable_cloudsql_disk_80_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql disk utilization alert policy"
 }
 
 variable "enable_cloudsql_disk_90_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql disk utilization alert policy"
 }
 
 variable "enable_cloudsql_replication_lag_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql replication_lag alert policy"
 }
 
 variable "enable_cloudsql_active_connections_alert" {
   type    = bool
   default = false
+  description = "Enable or disable Cloudsql active-connections alert policy"
 }
 
 variable "iam_user" {
   type = string
+  description = "IAM user to attach the custom role"
 }
 
 variable "create_custom_roles" {
   type    = bool
   default = true
+  description = "Least-priviledge role"
 }
 
 variable "enable_viewer_role" {
   type    = bool
   default = true
+  description = "Viewer role"
 }
-
 variable "health_check_name" {
-  type = string
+  type        = string
+  description = "Name of the load balancer health check"
 }
 
 variable "check_interval_sec" {
-  type = number
+  type        = number
+  description = "Time between each health check"
 }
 
 variable "port" {
-  type = number
+  type        = number
+  description = "Port used by the health check to connect to the backend service"
 }
 
 variable "request_path" {
-  type = string
+  type        = string
+  description = "HTTP request path used for the health check"
 }
 
 variable "timeout_sec" {
-  type = number
+  type        = number
+  description = "Time in seconds to wait for a health check response before marking it failed"
 }
 
 variable "healthy_threshold" {
-  type = number
+  type        = number
+  description = "Number of consecutive successful health checks required to mark the backend healthy"
 }
 
 variable "unhealthy_threshold" {
-  type = number
+  type        = number
+  description = "Number of consecutive failed health checks required to mark the backend unhealthy"
 }
 
 variable "security_policy_name" {
   type = string
+  description = "value"
 }
 
 variable "rule_priority" {
@@ -159,8 +189,6 @@ variable "default_rule_action" {
   type    = string
   default = "allow"
 }
-
-# root/variables.tf
 
 variable "enable_gke_node_cpu_80_alert" {
   type    = bool
@@ -202,54 +230,50 @@ variable "enable_gke_backup_failure_alert" {
 #  default = false
 #}
 
-#variable "gke_backup_plan_name" {
-#  type = string
-#}
-
-#variable "gke_cluster_id" {
-#  type = string
-#}
-
-#variable "gke_backup_region" {
-#  type = string
-#}
-
-#variable "gke_backup_retention_days" {
-#  type    = number
-#  default = 7
-#}
-
-#variable "gke_backup_cron_schedule" {
-#  type    = string
-#  default = "0 1 * * *"
-#}
-
-#variable "enable_budget_alert" {
-#  type    = bool
-# default = false
-#}
-
-#variable "billing_account_id" {
-#  type = string
-#}
-
-#variable "budget_name" {
-#  type = string
-#}
-
-#variable "project_number" {
-#  type = string
-#}
-
-#variable "budget_amount" {
-#  type = number
-#}
-
-variable "region" {
+variable "gke_backup_plan_name" {
   type = string
 }
 
-variable "project_id" {
+variable "gke_cluster_id" {
+  type = string
+}
+
+variable "gke_backup_region" {
+  type = string
+}
+
+variable "gke_backup_retention_days" {
+  type    = number
+  default = 7
+}
+
+variable "gke_backup_cron_schedule" {
+  type    = string
+  default = "0 1 * * *"
+}
+
+variable "enable_budget_alert" {
+  type    = bool
+ default = false
+}
+
+variable "billing_account_id" {
+  type = string
+}
+
+variable "budget_name" {
+  type = string
+}
+
+variable "project_number" {
+  type = string
+}
+
+variable "budget_amount" {
+  type = number
+}
+
+variable "region" {
   type = string
 }
 
