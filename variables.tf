@@ -227,3 +227,24 @@ variable "gke_backup_cron_schedule" {
   type    = string
   default = "0 1 * * *"
 }
+
+variable "enable_budget_alert" {
+  type    = bool
+  default = false
+}
+
+variable "billing_account_id" {
+  type = string
+}
+
+variable "budget_name" {
+  type = string
+}
+
+variable "project_number" {
+  type = string
+}
+
+variable "budget_amount" {
+  type = number
+}
