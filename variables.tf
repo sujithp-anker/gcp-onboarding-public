@@ -122,7 +122,7 @@ variable "Enable_CloudSQL_Utilization_Alerts" {
 #   description = "Viewer role"
 # }
 
-variable "iam_config" {
+variable "Create_Least_Privele_User" {
   type = object({
     user                = string
     create_custom_roles = optional(bool, true)
