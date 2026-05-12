@@ -1,8 +1,3 @@
-provider "google" {
-    project = "ankercloud-testing-account"
-    region = "asia-south1"
-}
-
 locals {
   retention_days = var.environment == "Prod" ? 30 : 7 
 }

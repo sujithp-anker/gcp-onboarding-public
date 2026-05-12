@@ -1,8 +1,3 @@
-provider "google" {
-    project = "ankercloud-testing-account"
-    region = "asia-south-1"  
-}
-
 resource "google_monitoring_notification_channel" "email" {
   for_each     = toset(split(",", var.email_address))
   
