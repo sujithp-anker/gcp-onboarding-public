@@ -6,16 +6,17 @@ provider "google" {
 module "notification_channel" {
   source = "./modules/notification_channel"
 
-  display_name  = var.Display_name
-  email_address = var.Email_address
+  display_name  = var.Customer_Name
+  email_address = var.Alert_Emails
 }
 
 module "snapshot_schedule" {
-  source = "./modules/snapshot_schedule"
-
-  days_in_cycle  = var.days_in_cycle
-  start_time     = var.start_time
-  retention_days = var.retention_days
+  source      = "./modules/snapshot_schedule"
+  count       = var.Enable_Snapshot_Schedule ? 1 : 0
+  
+  project_id  = var.Project_Id
+  region      = var.Region
+  environment = var.Environment
 }
 
 module "vm-alerts" {
@@ -57,7 +58,7 @@ module "custom_iam_role" {
 
   source = "./modules/iam-least-priviledge-role"
 
-  project_id = var.project_id
+  project_id = var.Project_Id
   iam_user   = var.iam_user
 
   create_custom_roles = var.create_custom_roles
@@ -69,7 +70,7 @@ module "lb_health_check" {
 
   source = "./modules/lb-healthcheck"
 
-  project_id = var.project_id
+  project_id = var.Project_Id
 
   health_check_name = var.health_check_name
 
@@ -87,7 +88,7 @@ module "cloudarmor_policy" {
 
   source = "./modules/cloudarmor-policy"
 
-  project_id = var.project_id
+  project_id = var.Project_Id
 
   security_policy_name = var.security_policy_name
 
@@ -151,9 +152,9 @@ module "resource_tagging" {
 
   source = "./modules/resource-tagging"
 
-  project_id = var.project_id
+  project_id = var.Project_Id
 
-  region = var.region
+  region = var.Region
 
   function_name = var.function_name
 
@@ -168,21 +169,13 @@ module "monitoring_alerts" {
 
   source = "./modules/monitoring-alerts"
 
-  enable_iam_policy_change_alert = var.enable_iam_policy_change_alert
-
-  enable_firewall_events_alert = var.enable_firewall_events_alert
-
-  enable_instance_delete_alert = var.enable_instance_delete_alert
-
-  enable_instance_insert_alert = var.enable_instance_insert_alert
-
-  enable_label_modification_alert = var.enable_label_modification_alert
-
-  enable_service_account_creation_alert = var.enable_service_account_creation_alert
-
-  enable_disk_deletion_alert = var.enable_disk_deletion_alert
-
-  enable_service_account_key_deletion_alert = var.enable_service_account_key_deletion_alert
-
+  enable_iam_policy_change_alert = var.Enable_IAM_Policy_Change_Alerts
+  enable_firewall_events_alert = var.Enable_Firewall_Events_Alerts
+  enable_instance_delete_alert = var.Enable_Instance_Delete_Alerts
+  enable_instance_insert_alert = var.Enable_Instance_Insert_Alerts
+  enable_label_modification_alert = var.Enable_Label_Modification_Alerts
+  enable_service_account_creation_alert = var.Enable_Service_Account_Creation_Alerts
+  enable_disk_deletion_alert = var.Enable_Disk_Deletion_Alerts
+  enable_service_account_key_deletion_alert = var.Enable_Service_Account_Key_Deletion_Alerts
   notification_channel_id = module.notification_channel.notification_channel_id
 }

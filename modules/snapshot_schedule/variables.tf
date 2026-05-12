@@ -1,14 +1,11 @@
-variable "days_in_cycle" {
-    type = number
-  description = "Takes the snapshot on every mentioned days"
+variable "environment" {
+  type = string
 }
 
-variable "start_time" {
-    type = string
-  description = "Mention the time to start the schedule"
+variable "project_id" {
+  type = string
 }
 
-variable "retention_days" {
-    type = number
-  description = "Mention the retension days to store the snapshots"
+variable "region" {
+  type = region
 }

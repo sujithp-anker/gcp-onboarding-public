@@ -1,78 +1,93 @@
 
-variable "project_id" {
+variable "Customer_Name" {
   type        = string
-  description = "Enter GCP Project ID"
+  description = "The name of the client (e.g., 'AcmeCorp'). Used to name all new resources."
 }
 
-variable "Display_name" {
+variable "Project_Id" {
   type        = string
-  description = "Display name for alerts-notification"
+  description = "Project ID of the customer account."
+}
+
+# variable "Display_name" {
+#   type        = string
+#   description = "Display name for alerts-notification"
+#   default     = ""
+# }
+
+variable "Region" { 
+  type        = string
   default     = ""
+  description = "The GCP Region where the servers and databases are located."
 }
 
-variable "Email_address" {
+variable "Environment" {
   type        = string
-  description = "Email address for alerts notification"
+  default     = "Stage"
+  description = "Set to 'Prod' (30-day retention) or 'Stage' (7-day retention). Applies "
 }
 
-variable "days_in_cycle" {
-  type        = number
-  description = "eg:1, create snapshot every 1 day"
+variable "Enable_Monitoring" {
+  type        = bool
+  default     = true
+  description = "Turn OFF (false) to stop alerts and emails."
 }
 
-variable "start_time" {
-  type        = string
-  description = "Start time for the snapshot schedule,[24 hour format]"
+variable "Alert_Emails" {
+  description = "List of email addresses to receive alerts."
+  type    = string
+  default = ""
 }
 
-variable "retention_days" {
-  type        = number
-  description = "Retention period for the snapshots"
+variable "Enable_Snapshot_Schedule" {
+  type        = bool
+  default     = false
+  description = "If true, enables automated daily snapshots for VM disks. Retention will be set based on Environment."
 }
 
-variable "enable_iam_policy_change_alert" {
+variable "Enable_IAM_Policy_Change_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for IAM policy modification"
 }
 
-variable "enable_firewall_events_alert" {
+variable "Enable_Firewall_Events_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for modifying firewall"
 }
 
-variable "enable_instance_delete_alert" {
+variable "Enable_Instance_Delete_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for instance deletion"
 }
 
-variable "enable_instance_insert_alert" {
+variable "Enable_Instance_Insert_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for instance creation"
 }
 
-variable "enable_label_modification_alert" {
+variable "Enable_Label_Modification_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for label modification"
 }
 
-variable "enable_service_account_creation_alert" {
+variable "Enable_Service_Account_Creation_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for service account creation"
 }
 
-variable "enable_disk_deletion_alert" {
+variable "Enable_Disk_Deletion_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for disk deletion"
 }
 
-variable "enable_service_account_key_deletion_alert" {
+variable "Enable_Service_Account_Key_Deletion_Alerts" {
   type    = bool
   default = false
   description = "Alert policy for service account key deletion"
@@ -321,10 +336,6 @@ variable "project_number" {
 
 variable "budget_amount" {
   type = number
-}
-
-variable "region" {
-  type = string
 }
 
 variable "function_name" {
