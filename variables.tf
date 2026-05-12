@@ -284,43 +284,66 @@ variable "GKE_Cluster_ID" {
   description = "The full resource ID of the GKE cluster (e.g., projects/project-id/locations/region/clusters/cluster-name)."
 }
 
-variable "enable_budget_alert" {
-  type    = bool
-  default = false
+# variable "enable_budget_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "billing_account_id" {
+#   type = string
+# }
+
+# variable "budget_name" {
+#   type = string
+# }
+
+# variable "project_number" {
+#   type = string
+# }
+
+# variable "budget_amount" {
+#   type = number
+# }
+
+variable "Enable_Budget_Alerts" {
+  type        = bool
+  default     = false
 }
 
-variable "billing_account_id" {
-  type = string
-}
-
-variable "budget_name" {
-  type = string
-}
-
-variable "project_number" {
-  type = string
-}
-
-variable "budget_amount" {
-  type = number
-}
-
-variable "function_name" {
+variable "Billing_Account_ID" {
   type        = string
-  description = "Cloud Function used for automatic resource labeling"
+  description = "The GCP Billing Account ID."
 }
 
-variable "pubsub_topic_name" {
+variable "SET_BudgetLimit" {
   type        = string
-  description = "Pub/Sub topic used to receive resource change events"
+  default     = ""
+  description = "Monthly spending limit in USD (e.g., 500)."
 }
 
-variable "asset_feed_name" {
+variable "SET_BudgetActualThresholds" {
   type        = string
-  description = "Cloud Asset Inventory service feed used to monitor resource events"
+  default     = "50,75,100"
+  description = "Alert when spending reaches these percentages (e.g., 50, 75, 100)."
 }
 
-variable "labels_to_apply" {
-  type        = map(string)
-  description = "Labels to attach automatically to newly created resources such as VMs, Cloud SQL instances, buckets, and Cloud Run services"
-}
+# variable "EnableResourceTagging" {
+#   description = "If true, deploys the CloudFormation stack for auto-tagging CreatedBy and CreatedAt."
+#   type        = bool
+#   default     = false
+# }
+
+# variable "pubsub_topic_name" {
+#   type        = string
+#   description = "Pub/Sub topic used to receive resource change events"
+# }
+
+# variable "asset_feed_name" {
+#   type        = string
+#   description = "Cloud Asset Inventory service feed used to monitor resource events"
+# }
+
+# variable "labels_to_apply" {
+#   type        = map(string)
+#   description = "Labels to attach automatically to newly created resources such as VMs, Cloud SQL instances, buckets, and Cloud Run services"
+# }

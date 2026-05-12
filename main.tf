@@ -109,22 +109,32 @@ module "gke_backup" {
 
 #}
 
-module "resource_tagging" {
-
-  source = "./modules/resource-tagging"
-
-  project_id = var.Project_Id
-
-  region = var.Region
-
-  function_name = var.function_name
-
-  pubsub_topic_name = var.pubsub_topic_name
-
-  asset_feed_name = var.asset_feed_name
-
-  labels_to_apply = var.labels_to_apply
+module "budget_alert" {
+  source                  = "./modules/budget-alert"
+  enable_budget_alert     = var.Enable_Budget_Alerts
+  billing_account_id      = var.Billing_Account_ID
+  project_id              = var.Project_Id
+  budget_limit            = var.SET_BudgetLimit
+  thresholds              = var.SET_BudgetActualThresholds
+  notification_channel_id = module.notification_channel.notification_channel_id
 }
+
+# module "resource_tagging" {
+
+#   source = "./modules/resource-tagging"
+
+#   project_id = var.Project_Id
+
+#   region = var.Region
+
+#   function_name = var.function_name
+
+#   pubsub_topic_name = var.pubsub_topic_name
+
+#   asset_feed_name = var.asset_feed_name
+
+#   labels_to_apply = var.labels_to_apply
+# }
 
 module "monitoring_alerts" {
 
