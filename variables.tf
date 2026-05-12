@@ -203,67 +203,87 @@ variable "LB_Names_to_Monitor" {
 #   default = "deny"
 # }
 
-variable "enable_gke_node_cpu_80_alert" {
-  type    = bool
-  default = false
+# variable "enable_gke_node_cpu_80_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "enable_gke_node_memory_80_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "enable_gke_node_disk_80_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "enable_gke_crashloopbackoff_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "enable_gke_pending_pods_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "enable_gke_cluster_cpu_memory_saturation_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "enable_gke_backup_failure_alert" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "enable_gke_backup_plan" {
+#   type    = bool
+#   default = false
+# }
+
+# variable "gke_backup_plan_name" {
+#   type        = string
+#   description = "Backup Plan for GKE"
+# }
+
+# variable "gke_cluster_id" {
+#   type = string
+# }
+
+# variable "gke_backup_region" {
+#   type = string
+# }
+
+# variable "gke_backup_retention_days" {
+#   type    = number
+#   default = 7
+# }
+
+# variable "gke_backup_cron_schedule" {
+#   type    = string
+#   default = "0 1 * * *"
+# }
+
+variable "enable_gke_utilization_alerts" {
+  type        = bool
+  default     = false
+  description = "If true, enables all GKE performance and health alerts for clusters labeled with 'monitoring=true'."
 }
 
-variable "enable_gke_node_memory_80_alert" {
-  type    = bool
-  default = false
-}
-
-variable "enable_gke_node_disk_80_alert" {
-  type    = bool
-  default = false
-}
-
-variable "enable_gke_crashloopbackoff_alert" {
-  type    = bool
-  default = false
-}
-
-variable "enable_gke_pending_pods_alert" {
-  type    = bool
-  default = false
-}
-
-variable "enable_gke_cluster_cpu_memory_saturation_alert" {
-  type    = bool
-  default = false
-}
-
-variable "enable_gke_backup_failure_alert" {
-  type    = bool
-  default = false
-}
-
-variable "enable_gke_backup_plan" {
-  type    = bool
-  default = false
-}
-
-variable "gke_backup_plan_name" {
-  type        = string
-  description = "Backup Plan for GKE"
-}
-
-variable "gke_cluster_id" {
-  type = string
-}
-
-variable "gke_backup_region" {
-  type = string
-}
-
-variable "gke_backup_retention_days" {
-  type    = number
-  default = 7
-}
-
-variable "gke_backup_cron_schedule" {
-  type    = string
-  default = "0 1 * * *"
+variable "gke_backup_config" {
+  type = object({
+    enable     = bool
+    cluster_id = string
+    region     = string
+  })
+  default = {
+    enable     = false
+    cluster_id = ""
+    region     = ""
+  }
+  description = "GKE Backup configuration. Retention is derived from the Environment variable."
 }
 
 variable "enable_budget_alert" {
