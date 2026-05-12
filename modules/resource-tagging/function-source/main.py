@@ -8,6 +8,8 @@ from handlers.cloudrun import handle_cloud_run
 from handlers.cloudfunction import handle_cloud_function
 from handlers.disk import handle_disk
 from handlers.cloudrunjob import handle_cloud_run_job
+from handlers.cloudsql import handle_cloud_sql
+from handlers.gke import handle_gke_cluster
 
 LABELS = json.loads(os.environ["LABELS"])
 
@@ -66,6 +68,14 @@ def main(event, context):
             print("Cloud Function detected")
 
             handle_cloud_function(asset, LABELS)
+
+        elif asset_type == "sqladmin.googleapis.com/Instance":
+
+            handle_cloud_sql(asset, LABELS)
+
+        elif asset_type == "container.googleapis.com/Cluster":
+
+            handle_gke_cluster(asset, LABELS)
 
         else:
 
