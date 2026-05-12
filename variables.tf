@@ -332,18 +332,3 @@ variable "EnableResourceTagging" {
   type        = bool
   default     = false
 }
-
-# variable "pubsub_topic_name" {
-#   type        = string
-#   description = "Pub/Sub topic used to receive resource change events"
-# }
-
-# variable "asset_feed_name" {
-#   type        = string
-#   description = "Cloud Asset Inventory service feed used to monitor resource events"
-# }
-
-# variable "labels_to_apply" {
-#   type        = map(string)
-#   description = "Labels to attach automatically to newly created resources such as VMs, Cloud SQL instances, buckets, and Cloud Run services"
-# }
