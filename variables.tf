@@ -122,14 +122,14 @@ variable "Enable_CloudSQL_Utilization_Alerts" {
 #   description = "Viewer role"
 # }
 
-variable "Create_Least_Privele_User" {
-  type = object({
-    user                = string
-    create_custom_roles = optional(bool, true)
-    enable_viewer_role  = optional(bool, true)
-  })
-  description = "IAM user and role configuration for onboarding."
-}
+# variable "Create_Least_Privele_User" {
+#   type = object({
+#     user                = string
+#     create_custom_roles = optional(bool, true)
+#     enable_viewer_role  = optional(bool, true)
+#   })
+#   description = "IAM user and role configuration for onboarding."
+# }
 
 variable "health_check_name" {
   type        = string
