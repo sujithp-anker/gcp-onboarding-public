@@ -41,8 +41,8 @@ module "custom_iam_role" {
 module "lb_monitoring" {
   source                  = "./modules/lb-monitoring"
   count                   = var.Enable_LB_Monitoring ? 1 : 0
-  lb_names                = var.LB_Names_to_Monitor
-  notification_channel_id = module.notification_channel.notification_channel_id
+  lb_names                = compact(split(",", replace(var.LB_Names_to_Monitor, " ", "")))
+  notification_channel_id = module.notification_channel.notification_channel_ids[0]
 }
 
 # module "cloudarmor_policy" {

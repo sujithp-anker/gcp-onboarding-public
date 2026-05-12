@@ -9,12 +9,6 @@ variable "Project_Id" {
   description = "Project ID of the customer account."
 }
 
-# variable "Display_name" {
-#   type        = string
-#   description = "Display name for alerts-notification"
-#   default     = ""
-# }
-
 variable "Region" { 
   type        = string
   default     = ""
@@ -34,9 +28,9 @@ variable "Enable_Monitoring" {
 }
 
 variable "Alert_Emails" {
-  description = "List of email addresses to receive alerts."
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
+  description = "Comma-separated list of emails (e.g., 'admin@co.com,devops@co.com')."
 }
 
 variable "Enable_Snapshot_Schedule" {
@@ -105,47 +99,6 @@ variable "Enable_CloudSQL_Utilization_Alerts" {
   description = "Enables CPU, Memory, Disk, Connections, and Lag alerts for Cloud SQL instances labeled with 'monitoring=true'."
 }
 
-# variable "iam_user" {
-#   type        = string
-#   description = "IAM user to attach the custom role"
-# }
-
-# variable "create_custom_roles" {
-#   type        = bool
-#   default     = true
-#   description = "Least-priviledge role"
-# }
-
-# variable "enable_viewer_role" {
-#   type        = bool
-#   default     = true
-#   description = "Viewer role"
-# }
-
-# variable "Create_Least_Privele_User" {
-#   type = object({
-#     user                = string
-#     create_custom_roles = optional(bool, true)
-#     enable_viewer_role  = optional(bool, true)
-#   })
-#   description = "IAM user and role configuration for onboarding."
-# }
-
-# variable "health_check_name" {
-#   type        = string
-#   description = "Name of the load balancer health check"
-# }
-
-# variable "check_interval_sec" {
-#   type        = number
-#   description = "Time between each health check"
-# }
-
-# variable "port" {
-#   type        = number
-#   description = "Port used by the health check to connect to the backend service"
-# }
-
 variable "Enable_LB_Monitoring" {
   type        = bool
   default     = false
@@ -153,119 +106,10 @@ variable "Enable_LB_Monitoring" {
 }
 
 variable "LB_Names_to_Monitor" {
-  type        = list(string)
-  default     = []
-  description = "List of existing Global HTTP(S) Load Balancer names (Forwarding Rule names) to monitor."
+  type        = string
+  default     = ""
+  description = "Comma-separated list of LB names."
 }
-
-# variable "request_path" {
-#   type        = string
-#   description = "HTTP request path used for the health check"
-# }
-
-# variable "timeout_sec" {
-#   type        = number
-#   description = "Time in seconds to wait for a health check response before marking it failed"
-# }
-
-# variable "healthy_threshold" {
-#   type        = number
-#   description = "Number of consecutive successful health checks required to mark the backend healthy"
-# }
-
-# variable "unhealthy_threshold" {
-#   type        = number
-#   description = "Number of consecutive failed health checks required to mark the backend unhealthy"
-# }
-
-# variable "security_policy_name" {
-#   type        = string
-#   description = "Backend security policy or Edge securit policy"
-# }
-
-# variable "rule_priority" {
-#   type        = number
-#   default     = 1000
-#   description = "Priority of the Cloudarmor rule"
-# }
-
-# variable "rule_action" {
-#   type    = string
-#   default = "deny(403)"
-# }
-
-# variable "src_ip_ranges" {
-#   type = list(string)
-# }
-
-# variable "default_rule_action" {
-#   type    = string
-#   default = "deny"
-# }
-
-# variable "enable_gke_node_cpu_80_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "enable_gke_node_memory_80_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "enable_gke_node_disk_80_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "enable_gke_crashloopbackoff_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "enable_gke_pending_pods_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "enable_gke_cluster_cpu_memory_saturation_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "enable_gke_backup_failure_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "enable_gke_backup_plan" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "gke_backup_plan_name" {
-#   type        = string
-#   description = "Backup Plan for GKE"
-# }
-
-# variable "gke_cluster_id" {
-#   type = string
-# }
-
-# variable "gke_backup_region" {
-#   type = string
-# }
-
-# variable "gke_backup_retention_days" {
-#   type    = number
-#   default = 7
-# }
-
-# variable "gke_backup_cron_schedule" {
-#   type    = string
-#   default = "0 1 * * *"
-# }
-
 variable "Enable_GKE_Utilization_Alerts" {
   type        = bool
   default     = false
@@ -281,29 +125,8 @@ variable "Enable_GKE_Backup_Governance" {
 variable "GKE_Cluster_ID" {
   type        = string
   default     = ""
-  description = "The full resource ID of the GKE cluster (e.g., projects/project-id/locations/region/clusters/cluster-name)."
+  description = "Comma-separated list of full GKE Cluster IDs."
 }
-
-# variable "enable_budget_alert" {
-#   type    = bool
-#   default = false
-# }
-
-# variable "billing_account_id" {
-#   type = string
-# }
-
-# variable "budget_name" {
-#   type = string
-# }
-
-# variable "project_number" {
-#   type = string
-# }
-
-# variable "budget_amount" {
-#   type = number
-# }
 
 variable "Enable_Budget_Alerts" {
   type        = bool

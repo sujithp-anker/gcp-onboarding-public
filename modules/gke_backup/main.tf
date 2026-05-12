@@ -1,22 +1,14 @@
 locals {
   retention_days = var.environment == "Prod" ? 35 : 7
+
+  cluster_list = compact(split(",", replace(var.cluster_id, " ", "")))
 }
 
-data "google_container_cluster" "targets" {
-  # This finds clusters in the project with the specific label
-  # Note: Filtering usually happens in the loop or via gcloud if needed, 
-  # but for a standard module, we often target by a specific name or all clusters.
-  # For label-based automation:
-  name     = "*" 
-  location = var.region
-}
-
-# 2. Create the Backup Plan
 resource "google_gke_backup_backup_plan" "gke_backup_plan" {
-  count = var.enable_gke_backup_governance ? 1 : 0
+  for_each = var.enable_gke_backup_governance ? toset(local.cluster_list) : []
 
-  name     = "${var.environment}-gke-backup-plan"
-  cluster  = var.cluster_id
+  name     = "${lower(var.environment)}-${element(split("/", each.value), length(split("/", each.value)) - 1)}-backup"
+  cluster  = each.value
   location = var.region
 
   retention_policy {

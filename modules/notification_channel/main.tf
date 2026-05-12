@@ -4,11 +4,11 @@ provider "google" {
 }
 
 resource "google_monitoring_notification_channel" "email" {
-    display_name = var.display_name 
-    type = "email"
-    labels = {
-        email_address = var.email_address
-    }
-
+  for_each     = toset(split(",", var.email_address))
+  
+  display_name = "${var.display_name} - ${each.value}"
+  type         = "email"
+  labels = {
+    email_address = trimspace(each.value)
+  }
 }
-
