@@ -38,40 +38,29 @@ module "custom_iam_role" {
   project_id = var.Project_Id
 }
 
-module "lb_health_check" {
-
-  source = "./modules/lb-healthcheck"
-
-  project_id = var.Project_Id
-
-  health_check_name = var.health_check_name
-
-  port         = var.port
-  request_path = var.request_path
-
-  check_interval_sec = var.check_interval_sec
-  timeout_sec        = var.timeout_sec
-
-  healthy_threshold   = var.healthy_threshold
-  unhealthy_threshold = var.unhealthy_threshold
+module "lb_monitoring" {
+  source                  = "./modules/lb-monitoring"
+  count                   = var.Enable_LB_Monitoring ? 1 : 0
+  lb_names                = var.LB_Names_to_Monitor
+  notification_channel_id = module.notification_channel.notification_channel_id
 }
 
-module "cloudarmor_policy" {
+# module "cloudarmor_policy" {
 
-  source = "./modules/cloudarmor-policy"
+#   source = "./modules/cloudarmor-policy"
 
-  project_id = var.Project_Id
+#   project_id = var.Project_Id
 
-  security_policy_name = var.security_policy_name
+#   security_policy_name = var.security_policy_name
 
-  rule_priority = var.rule_priority
+#   rule_priority = var.rule_priority
 
-  rule_action = var.rule_action
+#   rule_action = var.rule_action
 
-  src_ip_ranges = var.src_ip_ranges
+#   src_ip_ranges = var.src_ip_ranges
 
-  default_rule_action = var.default_rule_action
-}
+#   default_rule_action = var.default_rule_action
+# }
 
 # root/main.tf
 

@@ -131,65 +131,77 @@ variable "Enable_CloudSQL_Utilization_Alerts" {
 #   description = "IAM user and role configuration for onboarding."
 # }
 
-variable "health_check_name" {
-  type        = string
-  description = "Name of the load balancer health check"
+# variable "health_check_name" {
+#   type        = string
+#   description = "Name of the load balancer health check"
+# }
+
+# variable "check_interval_sec" {
+#   type        = number
+#   description = "Time between each health check"
+# }
+
+# variable "port" {
+#   type        = number
+#   description = "Port used by the health check to connect to the backend service"
+# }
+
+variable "Enable_LB_Monitoring" {
+  type        = bool
+  default     = false
+  description = "If true, enables 4xx and 5xx error rate monitoring for the Load Balancers listed."
 }
 
-variable "check_interval_sec" {
-  type        = number
-  description = "Time between each health check"
+variable "LB_Names_to_Monitor" {
+  type        = list(string)
+  default     = []
+  description = "List of existing Global HTTP(S) Load Balancer names (Forwarding Rule names) to monitor."
 }
 
-variable "port" {
-  type        = number
-  description = "Port used by the health check to connect to the backend service"
-}
+# variable "request_path" {
+#   type        = string
+#   description = "HTTP request path used for the health check"
+# }
 
-variable "request_path" {
-  type        = string
-  description = "HTTP request path used for the health check"
-}
+# variable "timeout_sec" {
+#   type        = number
+#   description = "Time in seconds to wait for a health check response before marking it failed"
+# }
 
-variable "timeout_sec" {
-  type        = number
-  description = "Time in seconds to wait for a health check response before marking it failed"
-}
+# variable "healthy_threshold" {
+#   type        = number
+#   description = "Number of consecutive successful health checks required to mark the backend healthy"
+# }
 
-variable "healthy_threshold" {
-  type        = number
-  description = "Number of consecutive successful health checks required to mark the backend healthy"
-}
+# variable "unhealthy_threshold" {
+#   type        = number
+#   description = "Number of consecutive failed health checks required to mark the backend unhealthy"
+# }
 
-variable "unhealthy_threshold" {
-  type        = number
-  description = "Number of consecutive failed health checks required to mark the backend unhealthy"
-}
+# variable "security_policy_name" {
+#   type        = string
+#   description = "Backend security policy or Edge securit policy"
+# }
 
-variable "security_policy_name" {
-  type        = string
-  description = "Backend security policy or Edge securit policy"
-}
+# variable "rule_priority" {
+#   type        = number
+#   default     = 1000
+#   description = "Priority of the Cloudarmor rule"
+# }
 
-variable "rule_priority" {
-  type        = number
-  default     = 1000
-  description = "Priority of the Cloudarmor rule"
-}
+# variable "rule_action" {
+#   type    = string
+#   default = "deny(403)"
+# }
 
-variable "rule_action" {
-  type    = string
-  default = "deny(403)"
-}
+# variable "src_ip_ranges" {
+#   type = list(string)
+# }
 
-variable "src_ip_ranges" {
-  type = list(string)
-}
-
-variable "default_rule_action" {
-  type    = string
-  default = "deny"
-}
+# variable "default_rule_action" {
+#   type    = string
+#   default = "deny"
+# }
 
 variable "enable_gke_node_cpu_80_alert" {
   type    = bool
