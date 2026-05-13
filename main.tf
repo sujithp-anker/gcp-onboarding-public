@@ -1,8 +1,3 @@
-provider "google" {
-  project = "ankercloud-testing-account"
-  region  = "asia-south1"
-}
-
 module "notification_channel" {
   source = "./modules/notification_channel"
 
