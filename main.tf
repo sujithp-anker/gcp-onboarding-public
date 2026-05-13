@@ -29,7 +29,8 @@ module "vpc_flowlogs" {
   environment          = var.Environment
   enable_vpc_flow_logs = var.Enable_Monitoring
 
-  vpc_names            = compact(split(",", replace(var.VPC_Names, " ", "")))
+  vpc_names            = compact(split(",", replace(var.VPC_Subnet_Names, " ", "")))
+  enable_monitoring                  = var.Enable_Monitoring
 }
 
 module "vm_alerts" {

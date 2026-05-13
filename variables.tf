@@ -44,7 +44,7 @@ variable "Enable_VPC_Flow_Logs" {
   default = false
 }
 
-variable "VPC_Names" {
+variable "VPC_Subnet_Names" {
   type        = string
   default     = ""
   description = "Comma-separated list of VPC/Subnetwork names to enable logging."
