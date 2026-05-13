@@ -28,28 +28,55 @@
 #   }
 # }
 
+# locals {
+#   parsed_vpc_list = compact(split(",", replace(var.vpc_names, " ", "")))
+# }
+
+# resource "null_resource" "enable_vpc_flow_logs" {
+#   for_each = (var.enable_vpc_flow_logs && var.enable_monitoring) ? toset(local.parsed_vpc_list) : []
+
+#   triggers = {
+#     subnets = join(",", local.parsed_vpc_list)
+#   }
+
+#   provisioner "local-exec" {
+#     command = <<EOT
+#       gcloud compute networks subnets update ${each.value} \
+#         --region=${var.region} \
+#         --project=${var.project_id} \
+#         --enable-flow-logs \
+#         --logging-aggregation-interval=interval-5-sec \
+#         --logging-flow-sampling=0.5 \
+#         --logging-metadata=include-all
+#     EOT
+#   }
+# }
+
+# resource "google_logging_project_bucket_config" "vpc_flow_log_bucket" {
+#   count          = var.enable_vpc_flow_logs ? 1 : 0
+#   project        = var.project_id
+#   location       = "global"
+#   bucket_id      = "${var.customer_name}-vpc-flow-logs"
+#   retention_days = var.environment == "Prod" ? 30 : 7
+# }
+
+
 locals {
   parsed_vpc_list = compact(split(",", replace(var.vpc_names, " ", "")))
 }
 
-resource "null_resource" "enable_vpc_flow_logs" {
+module "gcloud_enable_flow_logs" {
+  source  = "terraform-google-modules/gcloud/google"
+  version = "~> 3.1"
+
   for_each = (var.enable_vpc_flow_logs && var.enable_monitoring) ? toset(local.parsed_vpc_list) : []
 
-  triggers = {
-    subnets = join(",", local.parsed_vpc_list)
-  }
+  platform = "linux"
+  
+  create_cmd_entrypoint = "gcloud"
+  create_cmd_body       = "compute networks subnets update ${each.value} --region=${var.region} --project=${var.project_id} --enable-flow-logs --logging-aggregation-interval=interval-5-sec --logging-flow-sampling=0.5 --logging-metadata=include-all"
 
-  provisioner "local-exec" {
-    command = <<EOT
-      gcloud compute networks subnets update ${each.value} \
-        --region=${var.region} \
-        --project=${var.project_id} \
-        --enable-flow-logs \
-        --logging-aggregation-interval=interval-5-sec \
-        --logging-flow-sampling=0.5 \
-        --logging-metadata=include-all
-    EOT
-  }
+  skip_download = false 
 }
 
 resource "google_logging_project_bucket_config" "vpc_flow_log_bucket" {
