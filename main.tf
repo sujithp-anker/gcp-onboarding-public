@@ -132,20 +132,20 @@ module "budget_alert" {
   notification_channel_ids = module.notification_channel.notification_channel_ids
 }
 
-module "resource_tagging" {
-  source            = "./modules/resource-tagging"
-  count  = var.EnableResourceTagging ? 1 : 0
-  project_id        = var.Project_Id
-  region            = var.Region
-  function_name     = "${var.Customer_Name}-tagger"
-  pubsub_topic_name = "${var.Customer_Name}-asset-logs"
-  asset_feed_name   = "${var.Customer_Name}-feed"
+# module "resource_tagging" {
+#   source            = "./modules/resource-tagging"
+#   count  = var.EnableResourceTagging ? 1 : 0
+#   project_id        = var.Project_Id
+#   region            = var.Region
+#   function_name     = "${var.Customer_Name}-tagger"
+#   pubsub_topic_name = "${var.Customer_Name}-asset-logs"
+#   asset_feed_name   = "${var.Customer_Name}-feed"
   
-  labels_to_apply = {
-    managed_by  = "ankercloud"
-    environment = lower(var.Environment)
-  }
-}
+#   labels_to_apply = {
+#     managed_by  = "ankercloud"
+#     environment = lower(var.Environment)
+#   }
+# }
 
 module "monitoring_alerts" {
 

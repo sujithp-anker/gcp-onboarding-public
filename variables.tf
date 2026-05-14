@@ -160,8 +160,8 @@ variable "SET_BudgetActualThresholds" {
   description = "Alert when spending reaches these percentages (e.g., 50, 75, 100)."
 }
 
-variable "EnableResourceTagging" {
-  description = "If true, deploys the CloudFormation stack for auto-tagging CreatedBy and CreatedAt."
-  type        = bool
-  default     = false
-}
+# variable "EnableResourceTagging" {
+#   description = "If true, deploys the CloudFormation stack for auto-tagging CreatedBy and CreatedAt."
+#   type        = bool
+#   default     = false
+# }

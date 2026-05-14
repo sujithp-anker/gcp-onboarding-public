@@ -7,8 +7,8 @@ locals {
 
 import {
   for_each = local.network_pairs
-  id       = "projects/${var.project_id}/regions/${var.region}/subnetworks/${each.key}"
-  to       = google_compute_subnetwork.network_logging[each.key]
+  id = "projects/${var.project_id}/regions/${var.region}/subnetworks/${each.key}"  
+  to = google_compute_subnetwork.network_logging[each.key]
 }
 
 resource "google_compute_subnetwork" "network_logging" {
